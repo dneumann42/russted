@@ -8,6 +8,8 @@ edition = "2021"
 [dependencies]
 url = "*"
 url_serde = "*"
+toml = "*"
+dirs = "*"
 serde = { version = "*", features = ["derive"] }
 serde_with = { version = "*" }
 chrono = { version = "*", features = ["serde"] }
