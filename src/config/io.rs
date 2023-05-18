@@ -1,5 +1,8 @@
+use std::path::Path;
+
 use crate::config::types::Config;
 
+#[derive(Debug)]
 pub enum ConfigIOError {
     Generic(String),
     StdioError(std::io::Error),
@@ -21,11 +24,11 @@ impl From<toml::de::Error> for ConfigIOError {
 pub type Result<T> = std::result::Result<T, ConfigIOError>;
 
 pub trait ConfigWriter {
-    fn write(config: &Config, config_path: &std::path::Path) -> Option<ConfigIOError>;
+    fn write<P: AsRef<Path>>(config: &Config, config_path: P) -> Option<ConfigIOError>;
 }
 
 pub trait ConfigReader {
-    fn read(config_path: &std::path::Path) -> Result<Config>;
+    fn read<P: AsRef<Path>>(config_path: P) -> Result<Config>;
 }
 
 pub trait ConfigIO: ConfigWriter + ConfigReader {}
